@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "query": "What is Retrieval-Augmented Generation (RAG)?",
+      "ground_truth_docs": [
+        "RAG is a technique that combines retrieval of relevant documents with text generation. It uses a retriever to fetch relevant passages from a knowledge base, then feeds them to a language model to generate contextually grounded responses.",
+        "The RAG architecture consists of two main components: a dense retriever (like DPR) and a sequence-to-sequence generator (like BART or T5)."
+      ],
+      "ground_truth_answer": "RAG is an AI framework that combines information retrieval with text generation, using a retriever to fetch relevant documents and a language model to generate answers grounded in those documents."
+    },
+    {
+      "query": "How does the retrieval component in RAG work?",
+      "ground_truth_docs": [
+        "The retriever in RAG typically uses dense embeddings to find relevant documents. It encodes both the query and documents into vector space using models like DPR (Dense Passage Retrieval).",
+        "Modern retrievers use bi-encoder architectures where queries and documents are encoded separately, then similarity is computed via dot product or cosine similarity."
+      ],
+      "ground_truth_answer": "The retrieval component uses dense embeddings to encode queries and documents into vectors, then finds the most relevant documents using similarity metrics like cosine similarity or dot product."
+    },
+    {
+      "query": "What are the main advantages of RAG over standard language models?",
+      "ground_truth_docs": [
+        "RAG provides several benefits: reduced hallucinations by grounding answers in retrieved facts, ability to access external knowledge without retraining, and improved factual accuracy.",
+        "Unlike pure LLMs, RAG can cite sources and update its knowledge by simply updating the retrieval index, without expensive model retraining."
+      ],
+      "ground_truth_answer": "RAG reduces hallucinations, provides source citations, allows knowledge updates without retraining, and improves factual accuracy by grounding generation in retrieved documents."
+    },
+    {
+      "query": "What is the difference between RAG and fine-tuning?",
+      "ground_truth_docs": [
+        "Fine-tuning modifies model weights to adapt to specific tasks or domains, while RAG augments generation with retrieved information without changing the base model.",
+        "Fine-tuning is more expensive and requires retraining for knowledge updates, whereas RAG can dynamically access updated information from its retrieval corpus."
+      ],
+      "ground_truth_answer": "Fine-tuning modifies model weights for specific tasks, while RAG retrieves relevant information at inference time without changing the model. RAG is more flexible for knowledge updates."
+    },
+    {
+      "query": "What evaluation metrics are important for RAG systems?",
+      "ground_truth_docs": [
+        "RAG evaluation requires metrics for both retrieval (Recall@K, Precision@K, MRR) and generation quality (faithfulness, answer relevance, factual accuracy).",
+        "Hallucination detection is critical for RAG systems. Metrics should measure whether generated answers are grounded in retrieved context and don't introduce unsupported information."
+      ],
+      "ground_truth_answer": "Important metrics include retrieval metrics (Recall@K, Precision@K, MRR), generation metrics (faithfulness, relevance), and hallucination detection to ensure answers are grounded in context."
+    },
+    {
+      "query": "How can you detect hallucinations in RAG outputs?",
+      "ground_truth_docs": [
+        "Hallucination detection can use multiple signals: checking if answer claims are supported by retrieved documents, using LLMs to judge factuality, and measuring semantic drift between answer and context.",
+        "Citation-based methods verify that each sentence in the answer can be attributed to specific passages in the retrieved documents."
+      ],
+      "ground_truth_answer": "Hallucination detection uses multiple approaches: verifying claims against retrieved documents, LLM-based judges, citation checking, and measuring semantic similarity between answers and context."
+    },
+    {
+      "query": "What is the role of the generator in a RAG system?",
+      "ground_truth_docs": [
+        "The generator in RAG takes the query and retrieved documents as input and produces a coherent answer that synthesizes information from the retrieved passages.",
+        "Common generators include encoder-decoder models like T5, BART, or modern LLMs like GPT that can condition on retrieved context."
+      ],
+      "ground_truth_answer": "The generator synthesizes information from retrieved documents to produce coherent answers. It typically uses encoder-decoder or decoder-only language models that condition on the retrieved context."
+    },
+    {
+      "query": "What is DPR (Dense Passage Retrieval)?",
+      "ground_truth_docs": [
+        "DPR is a neural retrieval method that uses BERT-based encoders to create dense embeddings for queries and passages, enabling efficient semantic search.",
+        "Unlike traditional sparse methods like BM25, DPR captures semantic similarity through learned dense representations, improving retrieval quality for complex queries."
+      ],
+      "ground_truth_answer": "DPR is a neural retrieval approach using BERT encoders to create dense embeddings for queries and passages, enabling semantic search that outperforms traditional sparse retrieval methods."
+    },
+    {
+      "query": "How do you handle long documents in RAG systems?",
+      "ground_truth_docs": [
+        "Long documents are typically chunked into smaller passages (e.g., 100-300 tokens) to fit within retriever and generator context limits.",
+        "Chunking strategies include fixed-size windows, sentence-based splitting, or semantic segmentation to maintain coherent passage boundaries."
+      ],
+      "ground_truth_answer": "Long documents are chunked into smaller passages using strategies like fixed-size windows or sentence-based splitting to fit within model context limits while maintaining coherence."
+    },
+    {
+      "query": "What is the purpose of the top-k parameter in retrieval?",
+      "ground_truth_docs": [
+        "The top-k parameter determines how many most relevant documents are retrieved and passed to the generator. Higher k provides more context but increases computational cost.",
+        "Typical k values range from 3-10. The optimal k balances between providing sufficient context and avoiding noise from less relevant documents."
+      ],
+      "ground_truth_answer": "Top-k determines how many most relevant documents are retrieved. It balances providing sufficient context (higher k) with avoiding irrelevant information and computational cost (lower k)."
+    }
+  ]
+}
+
