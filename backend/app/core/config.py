@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/evrag"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./evrag.db"
     
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"

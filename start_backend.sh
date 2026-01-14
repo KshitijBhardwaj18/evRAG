@@ -28,18 +28,14 @@ fi
 if [ ! -f ".env" ]; then
     echo "⚠️  No .env file found. Creating from example..."
     cat > .env << EOF
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/evrag
+DATABASE_URL=sqlite+aiosqlite:///./evrag.db
 REDIS_URL=redis://localhost:6379/0
 ENV=development
 LOG_LEVEL=INFO
 EOF
-    echo "✅ Created .env file. Please update DATABASE_URL if needed."
+    echo "✅ Created .env file (using SQLite - no PostgreSQL needed)."
 fi
 
-# Check if database exists (simple check)
-echo ""
-echo "📊 Make sure PostgreSQL is running and database 'evrag' exists:"
-echo "   createdb evrag"
 echo ""
 
 # Start the server
