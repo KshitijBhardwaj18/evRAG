@@ -5,8 +5,10 @@ import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { datasetApi, evaluationApi, type Dataset, type DatasetItem } from "@/lib/api"
 import { ArrowLeft, Play } from "lucide-react"
+import VersionHistory from "@/components/VersionHistory"
 
 export default function DatasetDetailPage() {
   const params = useParams()
@@ -98,10 +100,14 @@ export default function DatasetDetailPage() {
             <CardTitle>Dataset Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-4 gap-4">
               <div>
                 <p className="text-sm text-gray-500">Total Items</p>
                 <p className="text-2xl font-bold">{dataset.total_items}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Current Version</p>
+                <Badge className="text-lg mt-1">v{dataset.current_version}</Badge>
               </div>
               <div>
                 <p className="text-sm text-gray-500">Format</p>
@@ -118,11 +124,13 @@ export default function DatasetDetailPage() {
           </CardContent>
         </Card>
 
-        {/* Sample Items */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Sample Items</CardTitle>
-          </CardHeader>
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
+          <VersionHistory datasetId={datasetId} />
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Sample Items</CardTitle>
+            </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {dataset.items.slice(0, 5).map((item, index) => (
@@ -144,6 +152,7 @@ export default function DatasetDetailPage() {
             </div>
           </CardContent>
         </Card>
+        </div>
 
         {/* Create Run Modal */}
         {showCreateRun && (

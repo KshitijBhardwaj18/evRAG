@@ -1,6 +1,5 @@
-"""Database models"""
-from .dataset import Dataset, DatasetItem
+from .dataset import Dataset, DatasetItem, DatasetVersion
 from .evaluation import EvaluationRun, EvaluationResult
 
-__all__ = ["Dataset", "DatasetItem", "EvaluationRun", "EvaluationResult"]
+__all__ = ["Dataset", "DatasetItem", "DatasetVersion", "EvaluationRun", "EvaluationResult"]
 

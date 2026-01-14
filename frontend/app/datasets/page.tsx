@@ -140,6 +140,10 @@ export default function DatasetsPage() {
                           <span className="text-gray-500">Items:</span>
                           <span className="font-semibold">{dataset.total_items}</span>
                         </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-500">Version:</span>
+                          <Badge variant="secondary">v{dataset.current_version}</Badge>
+                        </div>
                         <div className="flex items-center gap-2 text-gray-500">
                           <Calendar className="h-3 w-3" />
                           <span className="text-xs">

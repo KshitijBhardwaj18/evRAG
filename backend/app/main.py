@@ -1,22 +1,17 @@
-"""
-Main FastAPI application for EvRAG
-"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from .core.config import settings
 from .core.logging import log
-from .api.routes import datasets, evaluations
+from .api.routes import datasets, evaluations, versions
 from .db.session import engine, Base
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Lifecycle events"""
     log.info("Starting EvRAG API server")
     
-    # Create tables
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     
@@ -26,7 +21,6 @@ async def lifespan(app: FastAPI):
     log.info("Shutting down EvRAG API server")
 
 
-# Create FastAPI app
 app = FastAPI(
     title=settings.APP_NAME,
     description="Production-grade RAG Evaluation Platform",
@@ -34,23 +28,21 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include routers
 app.include_router(datasets.router, prefix="/api")
 app.include_router(evaluations.router, prefix="/api")
+app.include_router(versions.router, prefix="/api")
 
 
 @app.get("/")
 async def root():
-    """Health check endpoint"""
     return {
         "name": settings.APP_NAME,
         "status": "running",
@@ -60,7 +52,6 @@ async def root():
 
 @app.get("/health")
 async def health():
-    """Health check"""
     return {"status": "healthy"}
 
 
